@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from '../screens/HomeScreen';
-import RegisterScreen from '../screens/RegisterScreen';
+import HomeScreen from '../NatNinja-Mobile/screens/HomeScreen';
+import RegisterScreen from '../NatNinja-Mobile/screens/RegisterScreen';
 import ConfirmEmailScreen from '../screens/ConfirmEmailScreen';
 
 const Stack = createStackNavigator();
