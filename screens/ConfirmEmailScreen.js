@@ -1,26 +1,11 @@
-import React, { useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
 
-const ConfirmEmailScreen = ({ route, navigation }) => {
-  const { userId } = route.params;
-
-  useEffect(() => {
-    const confirmEmail = async () => {
-      try {
-        const response = await fetch(`http://localhost:5000/api/users/confirm/${userId}`);
-        const data = await response.json();
-        Alert.alert('Email Confirmation', data.message);
-        navigation.navigate('Home');
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-    confirmEmail();
-  }, [userId]);
-
+const ConfirmEmailScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text>Confirming your email...</Text>
+      <Text>Please check your email to confirm your account.</Text>
+      <Button title="Back to Home" onPress={() => navigation.navigate('Home')} />
     </View>
   );
 };
@@ -30,6 +15,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 16,
   },
 });
 

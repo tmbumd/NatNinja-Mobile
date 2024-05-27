@@ -5,36 +5,49 @@ const RegisterScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async () => {
+    setError(''); // Clear previous errors
     try {
-      const response = await fetch('http://localhost:5000/api/users/register', {
+      const response = await fetch('https://73f7-73-39-185-168.ngrok-free.app:5000/api/users/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password }),
       });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message || 'Something went wrong');
+      }
+
       const data = await response.json();
-      Alert.alert('Registration', data.message);
-      navigation.navigate('ConfirmEmail', { userId: data.userId });
+      Alert.alert(data.message);
+      navigation.navigate('ConfirmEmail');
     } catch (error) {
       console.error('Error:', error);
+      setError(error.message);
     }
   };
 
   return (
     <View style={styles.container}>
       <Text>Register</Text>
+      {error ? <Text style={styles.error}>{error}</Text> : null}
       <TextInput
         style={styles.input}
         placeholder="Username"
         value={username}
         onChangeText={setUsername}
+        required
       />
       <TextInput
         style={styles.input}
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
+        keyboardType="email-address"
+        required
       />
       <TextInput
         style={styles.input}
@@ -42,6 +55,7 @@ const RegisterScreen = ({ navigation }) => {
         value={password}
         onChangeText={setPassword}
         secureTextEntry
+        required
       />
       <Button title="Register" onPress={handleSubmit} />
     </View>
@@ -52,14 +66,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    padding: 16,
   },
   input: {
-    width: '80%',
-    padding: 10,
-    margin: 10,
+    height: 40,
+    borderColor: 'gray',
     borderWidth: 1,
-    borderColor: '#ccc',
+    marginBottom: 12,
+    padding: 10,
+  },
+  error: {
+    color: 'red',
+    marginBottom: 12,
   },
 });
 
