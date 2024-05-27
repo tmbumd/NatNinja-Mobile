@@ -10,7 +10,7 @@ const RegisterScreen = ({ navigation }) => {
   const handleSubmit = async () => {
     setError(''); // Clear previous errors
     try {
-      const response = await fetch('https://73f7-73-39-185-168.ngrok-free.app:5000/api/users/register', {
+      const response = await fetch('http://192.168.1.2:5000/api/users/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password }),
