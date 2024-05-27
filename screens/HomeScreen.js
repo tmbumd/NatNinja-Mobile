@@ -1,22 +1,16 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import MapComponent from '../../components/MapComponent';
+import { View, Text, Button } from 'react-native';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Text>Welcome to NatureNinja</Text>
-      <MapComponent />
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Register"
+        onPress={() => navigation.navigate('Register')}
+      />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default HomeScreen;
