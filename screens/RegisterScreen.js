@@ -22,7 +22,7 @@ const RegisterScreen = ({ navigation }) => {
       }
 
       const data = await response.json();
-      Alert.alert(data.message);
+      Alert.alert('Registration Successful, Please check your email to confirm your account.');
       navigation.navigate('ConfirmEmail');
     } catch (error) {
       console.error('Error:', error);
