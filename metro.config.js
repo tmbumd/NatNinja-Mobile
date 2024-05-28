@@ -1,18 +1,33 @@
 /**
  * Metro configuration for React Native
- * https://github.com/facebook/metro
+ * https://github.com/facebook/react-native
  *
  * @format
  */
 
-module.exports = {
+const { getDefaultConfig } = require('metro-config');
+
+module.exports = (async () => {
+  const {
+    resolver: { sourceExts, assetExts },
+    transformer,
+  } = await getDefaultConfig();
+  return {
     transformer: {
+      ...transformer,
       getTransformOptions: async () => ({
         transform: {
           experimentalImportSupport: false,
-          inlineRequires: true,
+          inlineRequires: false,
         },
+        sourceMap: true,
       }),
+      enableBabelRCLookup: false,
+      enableBabelRuntime: false,
+    },
+    resolver: {
+      assetExts: [...assetExts, 'png'],
+      sourceExts: [...sourceExts, 'jsx', 'js', 'ts', 'tsx'],
     },
   };
-  
+})();
