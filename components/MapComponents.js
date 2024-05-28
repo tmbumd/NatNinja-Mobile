@@ -6,7 +6,7 @@ const MapComponent = () => {
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/locations')
+    fetch('http://192.168.1.2:5000/api/locations')
       .then((response) => response.json())
       .then((data) => setLocations(data))
       .catch((error) => console.error('Error fetching locations:', error));
